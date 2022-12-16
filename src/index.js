@@ -23,3 +23,13 @@ function createTermCard(term) {
   `;
 }
 
+// whenever I click "fetch terms", fetch the terms
+// look at the HTML (each button has data-fetch)
+buttonsDiv.addEventListener("click", async (e) => {
+  if(e.target.dataset.fetch === "terms") {
+    const resp = await fetch("http://localhost:3001/api/terms")
+    const terms = await resp.json();
+
+    displayDiv.innerHTML = terms.map(createTermCard).join("")
+  }
+})
